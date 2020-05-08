@@ -18,4 +18,12 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 #ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 RUN /usr/local/bin/entrypoint.sh
 
+RUN apt-get -y update
+RUN apt-get install -y \
+    curl \
+    gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install npm@latest -g
+
 WORKDIR /var/www/html
