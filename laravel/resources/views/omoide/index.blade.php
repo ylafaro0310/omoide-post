@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body>
+    @if (session('success'))
+    <div class="alert alert-success">
+    {{ session('success') }}
+    </div>
+    @endif
     <div class="container text-break" style="padding-top: 10px;">
         <h2>一覧</h2>
         <ul class="list-group">
@@ -15,6 +20,12 @@
                 <div class="row">
                 <div class="col-9">
                     {{ $omoide->content }}
+                    @if (!empty($omoide->image_path))
+                    <figure>
+                        <img src="public/storage/{{ $omoide->image_path }}" width="100px" height="100px">
+                        <figcaption>思い出の写真</figcaption>
+                    </figure>
+                    @endif
                 </div>
                 <div class="col-3">
                     <form method="POST" action="{{ action('OmoideController@destroy',$omoide->id) }}">
