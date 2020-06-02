@@ -16,6 +16,7 @@ class CreateOmoidesTable extends Migration
         Schema::create('omoides', function (Blueprint $table) {
             $table->id();
             $table->string('content');
+            $table->string('image_path');
             $table->date('notified_at')->nullable();
             $table->timestamps();
         });
