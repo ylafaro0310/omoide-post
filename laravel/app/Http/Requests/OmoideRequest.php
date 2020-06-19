@@ -25,7 +25,7 @@ class OmoideRequest extends FormRequest
    {
        return [
            'content' => 'required|max:255',
-           'photo' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048'
+           'photo' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048'
        ];
    }
 }
