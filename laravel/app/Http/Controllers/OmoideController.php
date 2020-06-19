@@ -63,11 +63,13 @@ class OmoideController extends Controller
         $omoide->fill([
             'content' => $request->content,
         ])->save();
-        $omoideId = $omoide->id;
-        $request->photo->storeAs($this->publicPath($this->getImagePath()),$this->getImageFileName($omoideId));
-        $omoide->fill([
-            'image_path' => $this->getImageFilePath($omoideId),
-        ])->save();
+        if(!empty($request->photo)){
+            $omoideId = $omoide->id;
+            $request->photo->storeAs($this->publicPath($this->getImagePath()),$this->getImageFileName($omoideId));
+            $omoide->fill([
+                'image_path' => $this->getImageFilePath($omoideId),
+            ])->save();
+        }
         return redirect(route('omoide.index'))->with('success','新しい思い出を登録しました。');
     }
 
