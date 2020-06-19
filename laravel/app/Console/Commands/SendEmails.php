@@ -42,7 +42,7 @@ class SendEmails extends Command
         $omoide = Omoide::inRandomOrder()->first();
         Mail::send(['text'=>'emails.omoide_mail'],['omoide'=>$omoide],function($message){
             $message
-                ->to(env('MAIL_TO'))
+                ->to(config('mail.to.address'))
                 ->subject('本日の思い出メール');
         });
         $omoide->fill(['notified_at'=>date('Y-m-d H:i:s')])->save();
