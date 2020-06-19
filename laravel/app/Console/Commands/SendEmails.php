@@ -40,11 +40,15 @@ class SendEmails extends Command
     public function handle()
     {
         $omoide = Omoide::inRandomOrder()->first();
-        Mail::send(['text'=>'emails.omoide_mail'],['omoide'=>$omoide],function($message){
-            $message
-                ->to(config('mail.to.address'))
-                ->subject('本日の思い出メール');
-        });
-        $omoide->fill(['notified_at'=>date('Y-m-d H:i:s')])->save();
+
+        if(!empty($omoide)){
+            $this->line('TO: '. config('mail.to.address'));
+            $this->line('SUBJECT: 本日の思い出メール');
+            $this->line('本日の思い出メールです。');
+            $this->line('');
+            $this->line($omoide->content);
+        
+            $omoide->fill(['notified_at'=>date('Y-m-d H:i:s')])->save();
+        }
     }
 }
